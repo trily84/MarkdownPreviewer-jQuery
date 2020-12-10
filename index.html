@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Markdown Previewer jQuery</title>
+    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Previewer</title>    
+    <script src="./jquery.js"></script>
+    <script src="./marked.js"></script>
+    <script>
+        marked.setOptions({
+        gfm: true,
+        highlight: false,
+        tables: false,
+        breaks: true,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false,
+        langPrefix: false
+        });
+
+        let defaultText = `
+# h1
+
+## h2
+
+[my portfolio](http://treehausllc.com)
+
+<dl>
+  <dt>Definition List</dt>  
+  <dd>Something</dd>
+  <dt>Markdown in HTML</dt>
+  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
+</dl>  
+
+- code
+- all
+- day
+
+> just learning
+
+**bold text**
+---
+*italic text*
+
+![mario](https://pm1.narvii.com/7280/99faa236aafd49c34f011f56f728a36439e72126r1-256-256v2_hq.jpg)
+
+\`This is an example of inline code\`
+
+\`\`\`
+function exampleOf() {
+  return multilineCodeBlock;
+}
+\`\`\`
+
+---
+      `  
+        $(document).ready(function(){
+            $("#editor").val(defaultText);
+            $("#preview").html(marked(defaultText));
+            $("#editor").keyup(function(){
+                $("#preview").html(marked($("#editor").val()));
+                });
+        })  
+
+    </script>
+   
+</head>
+
+<body>
+    <div>
+        <h1 id = "title">Markdown Previewer</h1>
+    </div>
+    <div class = "container">
+            <div class = "editor">
+                <h2>Editor</h2>
+                <textarea id = "editor"></textarea>
+            </div>
+            <div class = "preview">
+                <h2 style = "text-align: center">Preview</h2>
+                <div id = "preview"></div>
+            </div>
+    </div>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
+</body>
+</html>
